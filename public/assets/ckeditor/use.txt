@@ -1,0 +1,62 @@
+
+<script src="<?php echo base_url();?>res/assets_admin/ckeditor/ckeditor.js"></script>  
+<script>  
+    var ed = $('#editor1').val(); 
+    
+ 
+    CKEDITOR.editorConfig = function( config ){
+    config.toolbarGroups = [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+        { name: 'clipboard', groups: [ 'undo', 'clipboard' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+        { name: 'forms', groups: [ 'forms' ] },
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+        { name: 'links', groups: [ 'links' ] },
+        { name: 'insert', groups: [ 'insert' ] },
+        { name: 'styles', groups: [ 'styles' ] },
+        { name: 'colors', groups: [ 'colors' ] },
+        { name: 'tools', groups: [ 'tools' ] },
+        { name: 'others', groups: [ 'others' ] },
+        { name: 'about', groups: [ 'about' ] }
+    ];
+
+    config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript';
+};
+    var roxyFileman = '<?php echo base_url();?>res/assets_admin/fileman/index.html?integration=ckeditor';
+     $(function() {
+       CKEDITOR.replace('editor1', {
+         filebrowserBrowseUrl: roxyFileman,
+         filebrowserImageBrowseUrl: roxyFileman + '&type=image',
+         removeDialogTabs: 'link:upload;image:upload'
+       });
+     });
+     $(function() {
+       CKEDITOR.replace('editor2', {
+         filebrowserBrowseUrl: roxyFileman,
+         filebrowserImageBrowseUrl: roxyFileman + '&type=image',
+         removeDialogTabs: 'link:upload;image:upload'
+       });
+     });
+     $(function() {
+       CKEDITOR.replace('editor3', {
+         filebrowserBrowseUrl: roxyFileman,
+         filebrowserImageBrowseUrl: roxyFileman + '&type=image',
+         removeDialogTabs: 'link:upload;image:upload'
+       });
+     });
+     $(function() {
+       CKEDITOR.replace('editor4', {
+         filebrowserBrowseUrl: roxyFileman,
+         filebrowserImageBrowseUrl: roxyFileman + '&type=image',
+         removeDialogTabs: 'link:upload;image:upload'
+       });
+     });
+     $(function() {
+       CKEDITOR.replace('editor5', {
+         filebrowserBrowseUrl: roxyFileman,
+         filebrowserImageBrowseUrl: roxyFileman + '&type=image',
+         removeDialogTabs: 'link:upload;image:upload'
+       });
+     });
+     </script>
