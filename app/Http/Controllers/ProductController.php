@@ -73,53 +73,30 @@ class ProductController extends Controller
 
 
 
-    public function index()
-    {
-        $products = Product::all(); // Fetch all products from the database
-        return view('ecommerce.product.list', compact('products'));
-    }
-
-    public function getProductsData()
+    public function index(Request $request)
     {
         $products = Product::with(['category', 'images'])->get();
 
-        return DataTables::of($products)
-            ->addColumn('images', function ($product) {
-                // Fetch the first image from the related product_images table
-                $firstImage = $product->images->first()->image_path ?? 'default-image.jpg'; // Fallback image
-                return '<img src="/storage/' . $firstImage . '" alt="Product Image" width="50" height="50" style="object-fit: cover;">';
-            })
-            ->addColumn('category', function ($product) {
-                return $product->category->name ?? 'N/A';
-            })
-            ->addColumn('status', function ($product) {
-                return $product->product_status;
-            })
-            ->addColumn('actions', function ($product) {
-                $editUrl = route('products.edit', $product->id);
-                $showUrl = route('products.show', $product->id);
 
-                return '<div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="' . $editUrl . '" class="dropdown-item">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                        </li>
-                        <li>
-                            <button class="dropdown-item view-details" data-id="' . $product->id . '">
-                                <i class="fas fa-info-circle"></i> Details
-                            </button>
-                        </li>
-                    </ul>
-                </div>';
-            })
+        return view('ecommerce.product.list', compact('products'));
+    }
 
-            ->rawColumns(['images', 'actions']) // Allow raw HTML for these columns
-            ->make(true);
+
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return response()->json(['message' => 'Product deleted successfully']);
+    }
+
+
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
 
@@ -224,20 +201,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('images')->find($id);
-
         if (!$product) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Product not found',
-            ]);
+            return response()->json(['status' => 'error', 'message' => 'Product not found']);
         }
-
-        // Return product data to be displayed in the modal
-        return response()->json([
-            'status' => 'success',
-            'product' => $product
-        ]);
+        return response()->json(['status' => 'success', 'product' => $product]);
     }
+
 
 
 

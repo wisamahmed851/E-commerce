@@ -64,7 +64,8 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
             Route::get('/{id}/edit', 'edit')->name('products.edit'); // Already exists
             Route::get('/{id}/show', 'show')->name('products.show'); // Already exists
             Route::get('/index', 'index')->name('products.index');
-            Route::get('/data', 'getProductsData')->name('products.data');
+            Route::get('/data', 'getProducts')->name('products.data');
+            Route::get('/destroy', 'destroy')->name('products.destroy');
             Route::post('/toggle-status/{id}', 'toggleStatus')->name('products.toggleStatus');
             Route::get('/grid', 'grid')->name('products.grid');
             Route::get('/details', 'details')->name('products.details');
