@@ -8,9 +8,13 @@ use App\Http\Controllers\{
     UserController,
     AuthController,
     CategoryController,
-    FrontendController
+    FrontendController,
+    PurchaseController,
+    StockController,
+    SupplierController
 };
 use App\Http\Middleware\{Guest, ValidUser};
+use App\Models\Supplier;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +59,20 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
 
         Route::controller(AuthController::class)->prefix('')->group(function () {
             Route::get('/', 'dashboardIndex')->name('dashboard.index');
+        });
+        Route::controller(SupplierController::class)->prefix('supplier')->group(function () {
+            Route::get('/', 'index')->name('supplier.index');
+            Route::get('/create', 'create')->name('supplier.create');
+            Route::post('/store', 'store')->name('supplier.store');
+            Route::get('/{id}/details', 'suppSho')->name('suppliers.show');
+        });
+        
+        Route::controller(StockController::class)->prefix('stocks')->group(function () {
+            Route::get('/', 'index')->name('stocks.index');
+        });
+        Route::controller(PurchaseController::class)->prefix('purchase')->group(function () {
+            Route::get('/create', 'create')->name('purchase.create');
+            Route::post('/store', 'store')->name('purchase.store');
         });
 
         Route::controller(ProductController::class)->prefix('products')->group(function () {

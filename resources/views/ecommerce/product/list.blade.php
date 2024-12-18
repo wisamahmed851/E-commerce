@@ -79,13 +79,26 @@
             </div>
         </div>
     </main>
+    @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Check if DataTable is already initialized and destroy it
+            if ($.fn.DataTable.isDataTable('#example')) {
+                $('#example').DataTable().destroy();
+            }
+
+            // Reinitialize DataTable
             $('#example').DataTable({
-                // Options here if needed
+                "paging": true,
+                "searching": true,
+                "ordering": true
             });
         });
     </script>
+@endpush
+
     <!-- Product Details Modal -->
     <!-- Product Details Modal -->
     <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel"
@@ -130,8 +143,8 @@
                         <div class="row">
                             ${product.images.map(image => {
                                 return `<div class="col-md-3">
-                                                <img src="{{ asset('storage') }}/${image.image_path}" class="img-fluid" alt="${product.name}">
-                                            </div>`;
+                                                        <img src="{{ asset('storage') }}/${image.image_path}" class="img-fluid" alt="${product.name}">
+                                                    </div>`;
                             }).join('')}
                         </div>
                     `;

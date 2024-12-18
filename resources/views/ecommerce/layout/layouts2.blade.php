@@ -10,6 +10,13 @@
     <title>Maxton | Bootstrap 5 Admin Dashboard Template</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 
@@ -81,7 +88,8 @@
             var chartElement = document.getElementById('chart'); // Ensure 'chart' exists in your HTML
             if (chartElement) {
                 var options = {
-                    /* Your chart options */ };
+                    /* Your chart options */
+                };
                 var chart = new ApexCharts(chartElement, options);
                 chart.render();
             } else {
@@ -830,13 +838,6 @@
                         <div class="menu-title">Ecommerce</div>
                     </a>
                     <ul>
-                        <li><a href="{{ route('products.create') }}"><i
-                                    class="material-icons-outlined">arrow_right</i>Add
-                                Product</a>
-                        </li>
-                        <li><a href="{{ route('products.index') }}"><i
-                                    class="material-icons-outlined">arrow_right</i>Products</a>
-                        </li>
                         <li><a href="{{ route('category.index') }}"><i
                                     class="material-icons-outlined">arrow_right</i>Category</a>
                         </li>
@@ -853,6 +854,57 @@
                         <li><a href="ecommerce-order-details.html"><i
                                     class="material-icons-outlined">arrow_right</i>Order
                                 Details</a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- Products --}}
+                <li>
+                    <a class="has-arrow">
+                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i>
+                        </div>
+                        <div class="menu-title">Products</div>
+                    </a>
+                    <ul>
+                        <li><a href="{{ route('products.create') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Add
+                                Product</a>
+                        </li>
+                        <li><a href="{{ route('products.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Products</a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- supplier --}}
+                <li>
+                    <a class="has-arrow">
+                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i>
+                        </div>
+                        <div class="menu-title">Suppliers</div>
+                    </a>
+                    <ul>
+                        <li><a href="{{ route('supplier.create') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Add
+                                Suppliers</a>
+                        </li>
+                        <li><a href="{{ route('supplier.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Suppliers</a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- purchasse --}}
+                <li>
+                    <a class="has-arrow">
+                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i>
+                        </div>
+                        <div class="menu-title">Purchases</div>
+                    </a>
+                    <ul>
+                        <li><a href="{{ route('purchase.create') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Add
+                                Purchases</a>
+                        </li>
+                        <li><a href="{{ route('supplier.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Purchases</a>
                         </li>
                     </ul>
                 </li>
