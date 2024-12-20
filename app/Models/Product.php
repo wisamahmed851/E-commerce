@@ -30,6 +30,10 @@ class Product extends Model
         'category_id',
         'images',
     ];
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -38,5 +42,4 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
-
 }

@@ -81,7 +81,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.21.1/tagify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <!-- Quill JS -->
     <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
@@ -860,20 +861,14 @@
                     </ul>
                 </li>
                 {{-- Products --}}
-                <li>
-                    <a class="has-arrow">
-                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i>
-                        </div>
+                <li class="{{ request()->routeIs('products.*') ? 'active' : '' }}">
+                    <a class="has-arrow" href="#">
+                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i></div>
                         <div class="menu-title">Products</div>
                     </a>
-                    <ul>
-                        <li><a href="{{ route('products.create') }}"><i
-                                    class="material-icons-outlined">arrow_right</i>Add
-                                Product</a>
-                        </li>
-                        <li><a href="{{ route('products.index') }}"><i
-                                    class="material-icons-outlined">arrow_right</i>Products</a>
-                        </li>
+                    <ul class="collapse {{ request()->routeIs('products.*') ? 'show' : '' }}">
+                        <li><a href="{{ route('products.create') }}"><i class="material-icons-outlined">arrow_right</i>Add Product</a></li>
+                        <li><a href="{{ route('products.index') }}"><i class="material-icons-outlined">arrow_right</i>Products</a></li>
                     </ul>
                 </li>
                 {{-- supplier --}}
@@ -909,6 +904,10 @@
                                     class="material-icons-outlined">arrow_right</i>Purchases</a>
                         </li>
                     </ul>
+                </li>
+                {{-- Stocks --}}
+                <li>
+                    <a href="{{ route('stocks.index') }}"><i class="material-icons-outlined">arrow_right</i>Stock</a>
                 </li>
                 <li class="menu-label">Pages</li>
                 <li>

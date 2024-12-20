@@ -13,7 +13,7 @@ class StockController extends Controller
     public function index()
     {
         $stocks = Stock::with('product')->get();
-        return view('stocks.index', compact('stocks'));
+        return view('ecommerce.stocks.index', compact('stocks'));
     }
 
     /**

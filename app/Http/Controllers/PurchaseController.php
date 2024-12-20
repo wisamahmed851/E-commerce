@@ -50,17 +50,25 @@ class PurchaseController extends Controller
             'quantity' => 'required|integer'
         ]);
 
-        $data['final_price'] = $data['purchase_price'] - $data['discount'];
+        // Calculate final price and total cost
+        $data['final_price'] = $data['purchase_price'] - ($data['discount'] ?? 0);
         $data['total_cost'] = $data['final_price'] * $data['quantity'];
 
+        // Create the purchase record
         PurchaseProduct::create($data);
 
+        // Update stock
         $stock = Stock::firstOrNew(['product_id' => $data['product_id']]);
-        $stock->quantity = $stock->quantity + $data['quantity'];
+        $stock->quantity += $data['quantity'];
         $stock->save();
 
-        return back()->with('success', 'Purchase recorded and stock updated.');
+        // Return AJAX response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Purchase recorded and stock updated successfully.'
+        ]);
     }
+
 
     public function viewReceipt($id)
     {

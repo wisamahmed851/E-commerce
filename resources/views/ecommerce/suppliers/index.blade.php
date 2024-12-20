@@ -6,7 +6,7 @@
         <div class="main-content">
             <div class="card mb-3">
                 <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Supplier List</h6>
+                    <h6 class="mb-0 text-dark" >Supplier List</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
