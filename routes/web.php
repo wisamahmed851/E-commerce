@@ -66,13 +66,18 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
             Route::post('/store', 'store')->name('supplier.store');
             Route::get('/{id}/details', 'suppSho')->name('suppliers.show');
         });
-        
+
         Route::controller(StockController::class)->prefix('stocks')->group(function () {
             Route::get('/', 'index')->name('stocks.index');
         });
         Route::controller(PurchaseController::class)->prefix('purchase')->group(function () {
+            Route::get('/', 'index')->name('purchase.index');
             Route::get('/create', 'create')->name('purchase.create');
             Route::post('/store', 'store')->name('purchase.store');
+            Route::get('/edit', 'edit')->name('purchase.edit');
+            Route::get('/{id}/receipt', 'viewReceipt')->name('purchase.receipt');
+            Route::get('/{id}/download', 'downloadReceipt')->name('purchase.download');
+
         });
 
         Route::controller(ProductController::class)->prefix('products')->group(function () {

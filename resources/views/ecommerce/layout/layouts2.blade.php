@@ -66,6 +66,8 @@
     <!-- Toastify CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <!-- Scripts -->
     <!-- Core Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> <!-- Load jQuery first -->
@@ -900,10 +902,10 @@
                     </a>
                     <ul>
                         <li><a href="{{ route('purchase.create') }}"><i
-                                    class="material-icons-outlined">arrow_right</i>Add
+                                    class="material-icons-outlined">arrow_right</i>New
                                 Purchases</a>
                         </li>
-                        <li><a href="{{ route('supplier.index') }}"><i
+                        <li><a href="{{ route('purchase.index') }}"><i
                                     class="material-icons-outlined">arrow_right</i>Purchases</a>
                         </li>
                     </ul>
@@ -1312,11 +1314,6 @@
     </script>
     <script src="{{ asset('second/assets/js/dashboard2.js') }}"></script>
     <script src="{{ asset('second/assets/js/main.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable(); // Make sure your table has the correct ID
-        });
-    </script>
 
     @stack('scripts')
 </body>
