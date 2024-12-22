@@ -1,21 +1,23 @@
 <div>
     <h3>Receipt #{{ $purchase->id }}</h3>
+
+    <!-- Product and Supplier Information -->
+    <p><strong>Product Name:</strong> {{ $purchase->product->name }}</p>
+    <p><strong>Supplier Name:</strong> {{ $purchase->supplier->name }}</p>
     <p><strong>Purchase ID:</strong> {{ $purchase->id }}</p>
-    <p><strong>Supplier ID:</strong> {{ $purchase->supplier_id }}</p>
-    <p><strong>Product ID:</strong> {{ $purchase->product_id }}</p>
 
     <table style="width:100%; border: 1px solid #ddd; margin-top: 20px; border-collapse: collapse;">
         <tr>
             <th style="border: 1px solid #ddd; padding: 8px;">Purchase Price</th>
-            <td style="border: 1px solid #ddd; padding: 8px;">{{ $purchase->purchase_price }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ number_format($purchase->purchase_price, 2) }}</td>
         </tr>
         <tr>
             <th style="border: 1px solid #ddd; padding: 8px;">Discount</th>
-            <td style="border: 1px solid #ddd; padding: 8px;">{{ $purchase->discount }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ number_format($purchase->discount, 2) }}</td>
         </tr>
         <tr>
             <th style="border: 1px solid #ddd; padding: 8px;">Final Price</th>
-            <td style="border: 1px solid #ddd; padding: 8px;">{{ $purchase->final_price }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ number_format($purchase->final_price, 2) }}</td>
         </tr>
         <tr>
             <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
@@ -23,7 +25,7 @@
         </tr>
         <tr>
             <th style="border: 1px solid #ddd; padding: 8px;">Total Cost</th>
-            <td style="border: 1px solid #ddd; padding: 8px;">{{ $purchase->total_cost }}</td>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ number_format($purchase->total_cost, 2) }}</td>
         </tr>
     </table>
 

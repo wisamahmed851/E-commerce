@@ -28,8 +28,8 @@
                                 @foreach ($purchases as $purchase)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $purchase->product_id }}</td>
-                                        <td>{{ $purchase->supplier_id }}</td>
+                                        <td>{{ $purchase->product->name ?? 'N/A'}}</td> <!-- Display Product Name -->
+                                        <td>{{ $purchase->supplier->name ?? 'N/A'}}</td> <!-- Display Supplier Name -->
                                         <td>{{ $purchase->purchase_price }}</td>
                                         <td>{{ $purchase->discount }}</td>
                                         <td>{{ $purchase->final_price }}</td>
@@ -59,6 +59,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>

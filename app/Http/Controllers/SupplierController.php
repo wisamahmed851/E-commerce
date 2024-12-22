@@ -14,9 +14,9 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $supplier = Supplier::all();
+        $suppliers = Supplier::all();
         //
-        return view('ecommerce.suppliers.index', compact('supplier'));
+        return view('ecommerce.suppliers.index', compact('suppliers'));
     }
 
     /**
@@ -62,10 +62,10 @@ class SupplierController extends Controller
         $supplier = Supplier::find($id);
 
         if (!$supplier) {
-             return response()->json([
-            'status' => 'success',
-            'supplier' => $supplier,
-        ]);
+            return response()->json([
+                'status' => 'success',
+                'supplier' => $supplier,
+            ]);
         }
 
         return response()->json([
@@ -80,7 +80,9 @@ class SupplierController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $supplier = Supplier::findOrFail($id); // Fetch the supplier by ID or fail if not found
+
+        return view('ecommerce.suppliers.edit', compact('supplier'));
     }
 
     /**
@@ -88,7 +90,22 @@ class SupplierController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $supplier = Supplier::findOrFail($id); // Fetch the supplier by ID
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'contact_person' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string',
+        ]);
+
+        $supplier->update($validatedData); // Update the supplier with validated data
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Supplier updated successfully!',
+        ]);
     }
 
     /**

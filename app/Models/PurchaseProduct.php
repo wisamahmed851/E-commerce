@@ -16,5 +16,13 @@ class PurchaseProduct extends Model
         'quantity',
         'total_cost'
     ];
-}
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+}

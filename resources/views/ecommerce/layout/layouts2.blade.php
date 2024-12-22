@@ -19,6 +19,11 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- jQuery -->
@@ -866,9 +871,11 @@
                         <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i></div>
                         <div class="menu-title">Products</div>
                     </a>
-                    <ul class="collapse {{ request()->routeIs('products.*') ? 'show' : '' }}">
-                        <li><a href="{{ route('products.create') }}"><i class="material-icons-outlined">arrow_right</i>Add Product</a></li>
-                        <li><a href="{{ route('products.index') }}"><i class="material-icons-outlined">arrow_right</i>Products</a></li>
+                    <ul class="">
+                        <li><a href="{{ route('products.create') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Add Product</a></li>
+                        <li><a href="{{ route('products.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Products</a></li>
                     </ul>
                 </li>
                 {{-- supplier --}}

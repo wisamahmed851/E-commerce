@@ -64,8 +64,11 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
             Route::get('/', 'index')->name('supplier.index');
             Route::get('/create', 'create')->name('supplier.create');
             Route::post('/store', 'store')->name('supplier.store');
-            Route::get('/{id}/details', 'suppSho')->name('suppliers.show');
+            Route::get('/{id}/edit', 'edit')->name('supplier.edit'); // Route for edit
+            Route::put('/{id}', 'update')->name('supplier.update'); // Route for update
+            Route::get('/{id}/details', 'suppSho')->name('suppliers.show'); // Changed to GET
         });
+
 
         Route::controller(StockController::class)->prefix('stocks')->group(function () {
             Route::get('/', 'index')->name('stocks.index');
@@ -74,10 +77,10 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
             Route::get('/', 'index')->name('purchase.index');
             Route::get('/create', 'create')->name('purchase.create');
             Route::post('/store', 'store')->name('purchase.store');
-            Route::get('/edit', 'edit')->name('purchase.edit');
+            Route::get('/{id}/edit', 'edit')->name('purchase.edit'); // Edit route
+            Route::put('/{id}/update', 'update')->name('purchase.update'); // Update route
             Route::get('/{id}/receipt', 'viewReceipt')->name('purchase.receipt');
             Route::get('/{id}/download', 'downloadReceipt')->name('purchase.download');
-
         });
 
         Route::controller(ProductController::class)->prefix('products')->group(function () {

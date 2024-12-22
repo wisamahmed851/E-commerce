@@ -17,13 +17,10 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        // Fetch supplier data
-        $purchase = PurchaseProduct::all();
+        // Fetch purchase data with related product and supplier
+        $purchases = PurchaseProduct::with(['product', 'supplier'])->get();
 
-        // Fetch purchase data
-        $purchases = PurchaseProduct::all(); // Replace with relevant model and query
-
-        return view('ecommerce.purchases.index', compact('purchase', 'purchases'));
+        return view('ecommerce.purchases.index', compact('purchases'));
     }
 
     /**
@@ -88,16 +85,55 @@ class PurchaseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Fetch the purchase by ID
+        $purchase = PurchaseProduct::findOrFail($id);
+        $products = Product::all(); // Fetch all products
+        $suppliers = Supplier::all(); // Fetch all suppliers
+
+        return view('ecommerce.purchases.edit', compact('purchase', 'products', 'suppliers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+         // Validate the input
+        $data = $request->validate([
+            'product_id' => 'required',
+            'supplier_id' => 'required',
+            'purchase_price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
+            'quantity' => 'required|integer'
+        ]);
+
+        // Find the existing purchase
+        $purchase = PurchaseProduct::findOrFail($id);
+
+        // Store old quantity to adjust stock correctly
+        $oldQuantity = $purchase->quantity;
+
+        // Calculate final price and total cost
+        $data['final_price'] = $data['purchase_price'] - ($data['discount'] ?? 0);
+        $data['total_cost'] = $data['final_price'] * $data['quantity'];
+
+        // Update the purchase record
+        $purchase->update($data);
+
+        // Update stock based on the difference in quantity
+        $stock = Stock::firstOrNew(['product_id' => $data['product_id']]);
+
+        // Adjust stock: Subtract old quantity and add new quantity
+        $stock->quantity = $stock->quantity - $oldQuantity + $data['quantity'];
+
+        // Save the updated stock
+        $stock->save();
+
+        // Return AJAX response
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Purchase updated and stock adjusted successfully.'
+        ]);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
