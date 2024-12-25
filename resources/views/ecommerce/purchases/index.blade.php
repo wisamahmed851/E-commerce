@@ -14,8 +14,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Product ID</th>
-                                    <th>Supplier ID</th>
+
+                                    <th>Product Name</th>
+                                    <th>Supplier Name</th>
                                     <th>Purchase Price</th>
                                     <th>Discount</th>
                                     <th>Final Price</th>
