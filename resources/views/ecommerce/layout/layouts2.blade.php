@@ -846,9 +846,6 @@
                         <div class="menu-title">Ecommerce</div>
                     </a>
                     <ul>
-                        <li><a href="{{ route('category.index') }}"><i
-                                    class="material-icons-outlined">arrow_right</i>Category</a>
-                        </li>
                         <li><a href="ecommerce-customers.html"><i
                                     class="material-icons-outlined">arrow_right</i>Customers</a>
                         </li>
@@ -863,6 +860,17 @@
                                     class="material-icons-outlined">arrow_right</i>Order
                                 Details</a>
                         </li>
+                    </ul>
+                </li>
+                {{-- Products --}}
+                <li class="{{ request()->routeIs('products.*') ? 'active' : '' }}">
+                    <a class="has-arrow" href="#">
+                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i></div>
+                        <div class="menu-title">Categouries</div>
+                    </a>
+                    <ul class="">
+                        <li><a href="{{ route('category.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>category</a></li>
                     </ul>
                 </li>
                 {{-- Products --}}

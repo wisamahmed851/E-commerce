@@ -14,13 +14,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-
-                                    <th>Product Name</th>
+                                    <th>Purchase ID</th>
                                     <th>Supplier Name</th>
-                                    <th>Purchase Price</th>
-                                    <th>Discount</th>
-                                    <th>Final Price</th>
-                                    <th>Quantity</th>
+                                    <th> Purchase Price</th>
+                                    <th>Total Discount</th>
+                                    <th>Total Price</th>
+                                    <th>Total Quantity</th>
                                     <th>Total Cost</th>
                                     <th>Actions</th>
                                 </tr>
@@ -29,13 +28,18 @@
                                 @foreach ($purchases as $purchase)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $purchase->product->name ?? 'N/A'}}</td> <!-- Display Product Name -->
-                                        <td>{{ $purchase->supplier->name ?? 'N/A'}}</td> <!-- Display Supplier Name -->
-                                        <td>{{ $purchase->purchase_price }}</td>
-                                        <td>{{ $purchase->discount }}</td>
-                                        <td>{{ $purchase->final_price }}</td>
-                                        <td>{{ $purchase->quantity }}</td>
-                                        <td>{{ $purchase->total_cost }}</td>
+                                        <td>{{ $purchase->id }}</td>
+                                        <td>{{ $purchase->supplier->name ?? 'N/A' }}</td>
+                                        <td>
+                                            @if ($purchase->products && $purchase->products->isNotEmpty())
+                                                {{ number_format($purchase->products->sum('purchase_price'), 2) }}
+                                            @else
+                                                {{ number_format(0, 2) }}  <!-- Display 0 if no products are associated -->
+                                            @endif
+                                        </td>                                        <td>{{ number_format($purchase->products->sum('discount'), 2) }}</td>
+                                        <td>{{ number_format($purchase->products->sum('final_price'), 2) }}</td>
+                                        <td>{{ $purchase->products->sum('quantity') }}</td>
+                                        <td>{{ number_format($purchase->products->sum('total_cost'), 2) }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle"
@@ -60,7 +64,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
@@ -92,6 +95,7 @@
             </div>
     </main>
 @endsection
+
 @push('scripts')
     <!-- Include DataTables script -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -109,6 +113,7 @@
                 "searching": true,
                 "ordering": true
             });
+
             // Load receipt in modal
             $('.view-receipt').on('click', function(e) {
                 e.preventDefault();

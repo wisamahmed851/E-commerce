@@ -38,13 +38,20 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    // Relationship with ProductImage
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    // Method to get the first image's URL
+    public function getFirstImageUrlAttribute()
+    {
+        $firstImage = $this->images()->first();
+        return $firstImage ? asset('storage/' . $firstImage->image_path) : asset('default-image.png'); // Use a fallback image if no image exists
     }
     public function purchaseProducts()
     {
         return $this->hasMany(PurchaseProduct::class);
     }
-    
 }
