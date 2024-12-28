@@ -105,6 +105,37 @@
             }
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            // When a menu with a dropdown is clicked
+            $('.has-arrow').click(function(e) {
+                e.preventDefault(); // Prevent the default action of the link (if any)
+
+                var $submenu = $(this).next('ul'); // Find the submenu related to the clicked item
+                var $parentMenu = $(this).closest('li'); // The parent <li> of the clicked item
+
+                // Close all other submenus except the one that's clicked
+                $('.sidebar-nav .metismenu li').not($parentMenu).removeClass('active').find('ul').slideUp();
+
+                // Toggle the clicked submenu
+                if ($parentMenu.hasClass('active')) {
+                    // If the current menu is already active, we close it
+                    $submenu.stop(true, true).slideUp();
+                    $parentMenu.removeClass('active');
+                } else {
+                    // If it's not active, we open it
+                    $submenu.stop(true, true).slideDown();
+                    $parentMenu.addClass('active');
+                }
+
+                // Make sure Categories is only toggled correctly
+                if ($parentMenu.find('.menu-title').text() === 'Categories') {
+                    $('.sidebar-nav .metismenu li').not($parentMenu).removeClass('active').find('ul')
+                        .slideUp();
+                }
+            });
+        });
+    </script>
 
     <style>
         .form-switch .form-check-input {
@@ -134,6 +165,16 @@
             bottom: 2px;
             left: 2px;
             transition: transform 0.4s;
+        }
+
+        /* Hide all submenus by default */
+        .sidebar-nav .metismenu li ul {
+            display: none;
+        }
+
+        /* Optionally add a transition for the dropdowns */
+        .sidebar-nav .metismenu li ul {
+            transition: all 0.3s ease;
         }
     </style>
 
