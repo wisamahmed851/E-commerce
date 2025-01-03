@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     AuthController,
     CategoryController,
     FrontendController,
+    POSController,
     PurchaseController,
     StockController,
     SupplierController
@@ -55,6 +56,18 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
             Route::get('/forgotPass', 'forgot')->name('auth.forgot');
             Route::get('/lockScreen', 'lock')->name('auth.lock');
             Route::get('/resetPass', 'reset')->name('auth.reset');
+        });
+        Route::controller(POSController::class)->prefix('pos')->group(function () {
+            Route::get('/', 'index')->name('pos.index'); // POS Dashboard
+            Route::get('/create', 'create')->name('pos.create'); // Create a new transaction
+            Route::post('/store', 'store')->name('pos.store'); // Store a transaction
+            Route::get('/show', 'detailsShow')->name('pos.detailsShow'); // View transaction details
+            Route::get('/{id}/fetch', 'fetchDetail')->name('pos.transaction-details.fetch'); // Edit transaction
+            Route::put('/{id}/update', 'updateDetail')->name('pos.transaction-details.update'); // Edit transaction
+            Route::delete('/{id}', 'detailsEdit')->name('pos.details.delete'); // Delete transaction
+            Route::put('/{id}', 'update')->name('pos.update'); // Update transaction
+            Route::get('/{id}/receipt', 'viewReceipt')->name('pos.receipt'); // View receipt
+            Route::get('/{id}/download', 'downloadReceipt')->name('pos.download'); // Download receipt
         });
 
         Route::controller(AuthController::class)->prefix('')->group(function () {

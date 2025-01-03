@@ -29,6 +29,7 @@ class Product extends Model
         'product_status',
         'category_id',
         'images',
+        'stock', 
     ];
     public function stocks()
     {
@@ -53,5 +54,10 @@ class Product extends Model
     public function purchaseProducts()
     {
         return $this->hasMany(PurchaseProduct::class);
+    }
+
+    public function transactionDetails()
+    {
+        return $this->hasMany(TransactionDetail::class);
     }
 }

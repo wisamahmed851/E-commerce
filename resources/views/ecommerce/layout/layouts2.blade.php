@@ -961,6 +961,26 @@
                         </li>
                     </ul>
                 </li>
+                {{-- Point Of Sale --}}
+                <li>
+                    <a class="has-arrow">
+                        <div class="parent-icon"><i class="material-icons-outlined">shopping_bag</i>
+                        </div>
+                        <div class="menu-title">POS</div>
+                    </a>
+                    <ul>
+                        <li><a href="{{ route('pos.create') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>add
+                                Transaction</a>
+                        </li>
+                        <li><a href="{{ route('pos.index') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Transactions</a>
+                        </li>
+                        <li><a href="{{ route('pos.detailsShow') }}"><i
+                                    class="material-icons-outlined">arrow_right</i>Transactions Details</a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- Stocks --}}
                 <li>
                     <a href="{{ route('stocks.index') }}"><i class="material-icons-outlined">arrow_right</i>Stock</a>
