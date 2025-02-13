@@ -53,7 +53,7 @@ class PurchaseController extends Controller
         ]);
 
         foreach ($data['products'] as $productData) {
-            $productData['purchase_id'] = $purchase->id;
+            $purchase->id = $purchase->id;
             $productData['supplier_id'] = $purchase->supplier_id; // Add this line
             $productData['final_price'] = $productData['purchase_price'] - ($productData['discount'] ?? 0);
             $productData['total_cost'] = $productData['final_price'] * $productData['quantity'];

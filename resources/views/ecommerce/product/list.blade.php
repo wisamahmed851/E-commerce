@@ -6,7 +6,8 @@
         <div class="main-content">
             <div class="card mb-3">
                 <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0">Product List</h6>
+                    <h6 class="mb-0 text-dark">Product List</h6>
+                    <a href="{{route('products.create')}}" class="btn" style="background: red">Add Products</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

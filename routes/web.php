@@ -129,7 +129,7 @@ Route::middleware([ValidUser::class, 'checkRole'])->group(function () {
 
     // Posh Website Routes
     Route::prefix('')->group(function () {
-        Route::controller(FrontendController::class)->prefix('home')->group(function () {
+        Route::controller(FrontendController::class)->prefix('')->group(function () {
             Route::get('/', 'index')->name('front.index');
             Route::get('/about', 'about')->name('front.about');
             Route::get('/contact', 'contact')->name('front.contact');
